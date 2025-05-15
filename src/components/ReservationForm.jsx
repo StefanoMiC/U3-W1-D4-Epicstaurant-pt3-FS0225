@@ -121,6 +121,7 @@ class ReservationForm extends Component {
       <Container fluid>
         <Row className="justify-content-center my-5">
           <Col xs={10} md={6}>
+            <h2>Prenota Tavolo</h2>
             <Alert
               show={this.state.alert.isVisible}
               variant={this.state.alert.variant}

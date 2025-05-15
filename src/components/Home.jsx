@@ -9,7 +9,7 @@ class Home extends Component {
   };
 
   render() {
-    console.log("MENU", menu);
+    // console.log("MENU", menu);
     return (
       <Container fluid>
         <Row className="justify-content-center">
@@ -18,8 +18,8 @@ class Home extends Component {
               onSlid={index => {
                 // onSlid è una prop collegata all'evento di FINE TRANSIZIONE SLIDE
                 // ci chiamerà la nostra funzione ogni volta che una slide viene cambiata: in automatico o manualmente
-                console.log("index", index);
-                console.log("pasta", menu[index]);
+                // console.log("index", index);
+                // console.log("pasta", menu[index]);
                 this.setState({ selectedPasta: menu[index] });
               }}
               // interval={null}
