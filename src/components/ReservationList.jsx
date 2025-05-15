@@ -47,16 +47,22 @@ class ReservationList extends Component {
   };
 
   deleteReservation = async id => {
-    console.log("fetching...");
+    // riceviamo l'id dal punto in cui deleteReservation viene chiamata (vedi JSX sottostante)
+
+    // con questo id possiamo impostare una fetch che sappia quale elemento eliminare
+    console.log("deleting...");
     this.setState({ isLoading: true });
     try {
       const response = await fetch("https://striveschool-api.herokuapp.com/api/reservation/" + id, { method: "DELETE" });
 
       if (response.ok) {
-        // const deletedReservation = await response.json();
+        // qui abbiamo certezza che l'elemento si sia cancellato effettivamente
+        const deletedReservation = await response.json();
 
-        // alert("hai eliminato la prenotazione di " + deletedReservation.name);
+        // visualizziamo avviso all'utente
+        alert("hai eliminato la prenotazione di " + deletedReservation.name);
 
+        // aggiorniamo la lista e di conseguenza gli elementi della UI senza l'elemento eliminato
         this.fetchReservations();
       } else {
         throw new Error("Errore nella cancellazione della prenotazione");
@@ -102,6 +108,11 @@ class ReservationList extends Component {
             {/* loader di caricamento, verrà reso visibile se la proprietà this.state.isLoading sarà true */}
             {this.state.isLoading && <Spinner animation="border" variant="info" />}
 
+            {/* usiamo un ternario quando vogliamo renderizzare esclusivamente un elemento o un altro in base a delle condizioni precise 
+            con il ternario non ci sarà modo per due blocchi jsx di visualizzarsi insieme 
+            se volessimo ammettere la possibilità che due blocchi coesistano sarà meglio separare i controlli in singoli corto circuiti 
+            (come ad es. l'elemento spinner è slegato dalle sorti di questi controlli e può essere visualizzato in contemporanea ad altri elementi)
+            */}
             {!this.state.hasError && this.state.reservations.length > 0 ? (
               <ListGroup>
                 {this.state.reservations.map(reserv => (
